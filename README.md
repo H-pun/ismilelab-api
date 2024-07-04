@@ -89,3 +89,14 @@ Untuk informasi lebih lanjut, lihat [Assistant Seeder](DataAccess/Seeders/Assist
 
 ## Informasi Tambahan
 Pastikan untuk menggunakan kredensial admin ini hanya untuk keperluan pengujian atau pengembangan. Saat memasuki masa praktikum, disarankan untuk mengganti kredensial default dengan yang lebih aman.
+
+## To Do
+Diurutkan berdasarkan prioritas:
+- Blog Information
+- Module Management
+- Upload Excel/Csv
+- Edit Student
+- Edit Assistant
+- Profile Assistant
+- Dashboard
+- Docker Compose

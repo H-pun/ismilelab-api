@@ -6,6 +6,12 @@ EXPOSE 8080
 
 ENV ASPNETCORE_URLS=http://+:8080
 
+# Install dnsmasq
+RUN apt-get update && apt-get install -y dnsmasq
+
+# Copy dnsmasq configuration file
+COPY dnsmasq.conf /etc/dnsmasq.conf
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["SealabAPI.csproj", "./"]
@@ -20,4 +26,6 @@ RUN dotnet publish "SealabAPI.csproj" -c Release -o /app/publish /p:UseAppHost=f
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SealabAPI.dll"]
+
+# Start dnsmasq and the application
+CMD ["sh", "-c", "dnsmasq && dotnet SealabAPI.dll"]
