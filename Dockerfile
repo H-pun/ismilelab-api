@@ -7,7 +7,7 @@ EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
 # Install dnsmasq
-RUN apt-get update && apt-get install -y dnsmasq
+RUN apt-get update && apt-get install -y dnsmasq iputils-ping
 
 # Copy dnsmasq configuration file
 COPY dnsmasq.conf /etc/dnsmasq.conf
@@ -28,4 +28,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 # Start dnsmasq and the application
-CMD ["sh", "-c", "dnsmasq && dotnet SealabAPI.dll"]
+CMD ["sh", "-c", "dnsmasq && sleep 2 && echo 'nameserver 127.0.0.1' > /etc/resolv.conf && ping -c 4 see.labs.telkomuniversity.ac.id && dotnet SealabAPI.dll"]
